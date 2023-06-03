@@ -6,7 +6,9 @@ const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const subscriptionType = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
+  
   {
+   
     name: {
       type: String,
       required: true,
@@ -31,6 +33,11 @@ const userSchema = new Schema(
       type: String,
       default: " ",
     },
+    avatarURL: {
+      type: String,
+  
+    },
+   
   },
   { versionKey: false, timestamps: true }
 );
@@ -40,8 +47,7 @@ userSchema.post("save", handleMongooseError);
 const registerSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
-  subscription: Joi.string().valid(...subscriptionType)
+  password: Joi.string().min(6).required()
 });
 
 const loginSchema = Joi.object({
@@ -50,7 +56,7 @@ const loginSchema = Joi.object({
 });
 
 const subscriptionSchema = Joi.object({
-    subscription: Joi.string().valid(...subscriptionType).required()
+    subscription: Joi.string().valid(...subscriptionType),
 })
 
 const schemasUser = {
