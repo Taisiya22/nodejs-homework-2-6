@@ -9,6 +9,6 @@ route.post("/login", validateBody(schemasUser.loginSchema), ctrl.login);
 route.get("/current", authenticate, ctrl.getCurrent);
 route.post("/logout", authenticate, ctrl.logout);
 route.patch("/:id", validateBody(schemasUser.subscriptionSchema), ctrl.updateSubscription);
-route.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar)
+route.put("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar)
 
 module.exports = route;
